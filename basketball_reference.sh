@@ -1,9 +1,5 @@
 #!/bin/bash
-if [ -z "$1" ]
-then 
-  echo "Not enough arguments"
-  exit 0
-elif [ $1 == "-p" ] 
+if [ $# != 0 ] && [ $1 == "-p" ] 
 then
   if [ $# == 3 ]
   then
@@ -17,7 +13,7 @@ then
     echo "Usage: -p firstname lastname"
     exit 0
   fi
-elif [ $1 == "-t" ]
+elif [ $# != 0 ] && [ $1 == "-t" ]
 then
   if [ $# == 2 ]
   then
@@ -28,6 +24,9 @@ then
     echo "Usage: -t team"
     exit 0
   fi
+else
+  echo "Invalid input"
+  exit 0
 fi
 curl -s $url | awk -v pattern="$search_pattern" -F'\"' '$0~pattern{
   gsub ("*", "");
