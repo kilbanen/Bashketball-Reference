@@ -19,7 +19,11 @@
   team_name=$2 &&
   url="https://www.basketball-reference.com/teams/" &&
   curl -s $url | awk -v team="full_table.*$team_name" -F'\"' '$0~team{
-    printf "https://basketball-reference.com%s\n",$10
+    gsub ("*", "");
+    gsub ("</strong>","");
+    gsub ("</a></th><td class=","");
+    gsub (">","");
+    printf "%s: https://basketball-reference.com%s\n",$11,$10
   }' &&
   exit 0 ||
 [ $1 == "-t" ] && echo "Usage: -t team" && exit 0
