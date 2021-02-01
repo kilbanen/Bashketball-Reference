@@ -14,14 +14,17 @@ then
     echo "Usage: -p firstname lastname"
     exit 0
   fi
-elif [ $# != 0 ] && [ $1 == "-t" ]
+elif [ $# -ge 2 ] && [ $1 == "-t" ]
 then
-  if [ $# == 3 ]
+  team_name=$2
+  url="https://www.basketball-reference.com/teams/"
+  search_pattern="full_table.*$team_name"
+  if [ $# == 2 ]
   then
-    team_name=$2
+    return_string="%s: https://basketball-reference.com%s\n"
+  elif [ $# == 3 ]
+  then
     year=$3
-    url="https://www.basketball-reference.com/teams/"
-    search_pattern="full_table.*$team_name"
     return_string="%s: https://basketball-reference.com%s$year.html\n"
   else
     echo "Usage: -t team year"
