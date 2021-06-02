@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ $# != 0 ] && [ $1 == "-p" ] 
+if [ $# != 0 ] && [ $1 == "player" ] 
 then
   if [ $# == 3 ]
   then
@@ -11,10 +11,10 @@ then
     search_pattern="tr.*$full_name"
     return_string="%s: https://basketball-reference.com%s\n"
   else
-    echo "Usage: -p firstname lastname"
+    echo "Usage: player firstname lastname"
     exit 0
   fi
-elif [ $# -ge 2 ] && [ $1 == "-t" ]
+elif [ $# -ge 2 ] && [ $1 == "team" ]
 then
   team_name=$2
   url="https://www.basketball-reference.com/teams/"
@@ -27,7 +27,7 @@ then
     year=$3
     return_string="%s: https://basketball-reference.com%s$year.html\n"
   else
-    echo "Usage: -t team year"
+    echo "Usage: team teamname year"
     exit 0
   fi
 else
